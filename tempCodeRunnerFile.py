@@ -1,1 +1,3 @@
-nob=int(input("Number Of Bits:"))
+f=open("msg.txt","w")
+for m in msg_bin:
+    f.write(m) 

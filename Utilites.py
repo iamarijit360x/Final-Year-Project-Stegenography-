@@ -61,5 +61,3 @@ def change(pixel,data,temp,nob): #returns the change requried in last 4 bits of 
                 diff=x
                 e=i
         return e
-bcuket=buck(6)
-print(change(19,'00',bcuket['00'],6))
