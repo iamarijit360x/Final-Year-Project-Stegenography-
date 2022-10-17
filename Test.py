@@ -1,24 +1,17 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Aug 10 01:41:02 2022
+from Encode import encode
+from Extract import extract
+import numpy,os
+path=os.getcwd()
+img_path=path+'/Image'
+stego_path=path+'/Stego'
+IMAGES=os.listdir(img_path)
+STEGo=os.listdir(stego_path)
 
-@author: iamar
-"""
-from PIL import Image  
-from PIL import Image, ImageChops,ImageOps
-import numpy
-
-ig="cat.jpg"
-original_image = Image.open(ig) 
-img1=original_image.copy()
-img1=img1.convert("L")
-img2=Image.open('stegoimg.PNG')
-img3 = ImageChops.subtract(image1 = img1, image2 = img2)
-img3=ImageOps.invert(img3)
-img3.show()
-arr=numpy.asarray(img3)
-
-for i in range(60):
-    print(arr[0][i])
-
-  
+global nob
+nob=6
+msg="ARIJIT BANERJEE CSE"
+for img in IMAGES[1:]:
+    x=encode(msg,nob,img_path,img,stego_path)
+for img in STEGO[1:]:
+    print('\nSecrect Message : '+extract(nob,x,stego_path+img+'_stego.PNG'))
+    

@@ -7,16 +7,15 @@ Created on Thur Sept 22
 
 
 from PIL import Image  
-import numpy
+import numpy,os
 from Utilites import add,bit2strings
 
-def extract(nob):
+def extract(nob,key,path):
     #nob=int(input("Number Of Bits:"))
-    original_image = Image.open('stegoimg.PNG') 
+    original_image = Image.open(path) 
     im=original_image.copy()
     a=numpy.asarray(im) 
     img_arr=numpy.copy(a)
-    key=int(input("Enter Key:"))
     Data=[]
     check=0
     h=im.height

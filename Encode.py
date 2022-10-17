@@ -9,11 +9,11 @@ from PIL import Image
 import numpy
 from Utilites import add,string2bits,buck,change
 
-def encode(msg,nob):
-    ig='cat.jpg'#input("Enter Image name with extension/Image path:")
-    original_image = Image.open(ig) 
+def encode(msg,nob,img_path,img,stego_path):
+    #ig='cat.jpg'#input("Enter Image name with extension/Image path:")
+    original_image = Image.open(img_path+'/'+img) 
     im=original_image.copy()
-    im=im.convert("L")
+    #im=im.convert("L")
 
     a=numpy.asarray(im) 
     img_arr=numpy.copy(a)
@@ -22,7 +22,7 @@ def encode(msg,nob):
     w=im.width
     #print(h,w)
     bucket=buck(nob)
-    print(bucket)
+    #print(bucket)
     msg_bin=list(string2bits(msg))
     f=open("msg.txt","w")
     for m in msg_bin:
@@ -68,8 +68,8 @@ def encode(msg,nob):
 
 
     im=Image.fromarray(numpy.asarray(img_arr))
-    im=im.save('stegoimg.PNG')
-    print('\n\nKEY=',len(msg_arr))
+    im=im.save(stego_path+'/'+img[:-4]+'_stego.PNG')
+    return len(msg_arr)
 
 
     
