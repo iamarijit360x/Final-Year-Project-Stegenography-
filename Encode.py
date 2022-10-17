@@ -42,19 +42,19 @@ for k in range(len(msg_arr)):
     t=img_arr[i][j]
     
     t=list(format(t,"b"))
-    t=t[-4:]
+    t=t[-nob:]
     t="".join(t)
     
-    c=change(int(t,2),msg_arr[j],bucket[msg_arr[k]])
+    c=change(int(t,2),msg_arr[j],bucket[msg_arr[k]],nob)
     print(f"IMG OLD={img_arr[i][j]} ",end=" ")
     if(c!=-1):
-        c=list('{:04b}'.format(c))
+        c=list(format(c,'0'+str(nob)+'b'))
         #print(c)
         c="".join(c)
         t=img_arr[i][j]
     
         t=list(format(t,"b"))
-        t=t[:-4]
+        t=t[:-nob]
         t="".join(t)
         t=t+c
         img_arr[i][j]=int(t,2)

@@ -9,10 +9,10 @@ from re import I
 
 def add(n,nob): #returns Binary addition of last nob bits
     b=format(n,"b")
-
+   
     x=(list(b))[::-1]
     x=x[:nob]
-    print(n,x)
+  
     n1=x.count('1')
     if(n1==0 or n1==4 or n1==8):
         s='00'
@@ -39,8 +39,8 @@ def buck(nob): #returns dictionary of bucket containing 00 01 10 11
             bucket[add(i,nob)].append(i)
             
     return bucket
-def change(pixel,data,temp): #returns the change requried in last 4 bits of the number in the corresponding pixel 
-    if(add(pixel,4)==data):
+def change(pixel,data,temp,nob): #returns the change requried in last 4 bits of the number in the corresponding pixel 
+    if(add(pixel,nob)==data):
         #print("No Chnage")
         return -1
     else:
@@ -48,10 +48,10 @@ def change(pixel,data,temp): #returns the change requried in last 4 bits of the 
         r=len(temp)-1
         
         
-        diff=100
+        diff=1000
         e=''
         pp=list(((format(pixel,"b"))))
-        pp=pp[-4:]
+        pp=pp[-nob:]
         pp="".join(pp)
         pp=int(pp,2)
        
@@ -61,7 +61,5 @@ def change(pixel,data,temp): #returns the change requried in last 4 bits of the 
                 diff=x
                 e=i
         return e
-b=buck(6)
-
-for i in b:
-    print(i,b[i])
+bcuket=buck(6)
+print(change(19,'00',bcuket['00'],6))

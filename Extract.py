@@ -11,7 +11,7 @@ import numpy
 from Utilites import add,bit2strings
 
 
-
+nob=int(input("Number Of Bits:"))
 original_image = Image.open('stegoimg.PNG') 
 im=original_image.copy()
 a=numpy.asarray(im) 
@@ -21,7 +21,7 @@ Data=[]
 check=0
 for i in range(im.height):
     for j in range(im.width):
-        Data.append(add(img_arr[i][j],4))
+        Data.append(add(img_arr[i][j],nob))
         check+=1
         if(check==key):
             break

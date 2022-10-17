@@ -1,2 +1,1 @@
-
-    
+nob=int(input("Number Of Bits:"))
