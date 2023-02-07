@@ -4,22 +4,18 @@ Created on Thur Sept 22
 
 @author: Arijit
 """
+import cv2
 from email.mime import image
 from PIL import Image  
 import numpy
 from Utilites import add,string2bits,buck,change
 
 def encode(msg,nob):
-    ig='cat.jpg'#input("Enter Image name with extension/Image path:")
-    original_image = Image.open(ig) 
-    im=original_image.copy()
-    im=im.convert("L")
-
-    a=numpy.asarray(im) 
-    img_arr=numpy.copy(a)
+    ig='cat.png'#input("Enter Image name with extension/Image path:")
+    img_arr = cv2.imread(ig)
     #print(img_arr.flags["WRITEABLE"])
-    h=im.height
-    w=im.width
+    w=img_arr.shape[0]
+    h=img_arr.shape[1]
     #print(h,w)
     bucket=buck(nob)
     print(bucket)
@@ -33,13 +29,13 @@ def encode(msg,nob):
     #print(msg_arr)
 
 
-
     j=0
     i=0
     k=0
+    rgb=0
     for k in range(len(msg_arr)):
         
-        t=img_arr[i][j]
+        t=img_arr[i][j][rgb]
         
         t=list(format(t,"b"))
         t=t[-nob:]
@@ -51,7 +47,7 @@ def encode(msg,nob):
             c=list(format(c,'0'+str(nob)+'b'))
             #print(c)
             c="".join(c)
-            t=img_arr[i][j]
+            t=img_arr[i][j][rgb]
 
             t=list(format(t,"b"))
             t=t[:-nob]
@@ -64,12 +60,13 @@ def encode(msg,nob):
         if(j==w):
             j=0
             i=i+1
+        if(rgb==3):
+            rgb=0
         
 
 
-    im=Image.fromarray(numpy.asarray(img_arr))
-    im=im.save('stegoimg.PNG')
+    cv2.imwrite('stegoimg.PNG',img_arr)
     print('\n\nKEY=',len(msg_arr))
 
 
-    
+     

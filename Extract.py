@@ -5,31 +5,31 @@ Created on Thur Sept 22
 @author: Arijit
 """
 
-
+import cv2
 from PIL import Image  
 import numpy
 from Utilites import add,bit2strings
 
 def extract(nob):
     #nob=int(input("Number Of Bits:"))
-    original_image = Image.open('stegoimg.PNG') 
-    im=original_image.copy()
-    a=numpy.asarray(im) 
-    img_arr=numpy.copy(a)
+    img_arr = cv2.imread('stegoimg.PNG') 
     key=int(input("Enter Key:"))
     Data=[]
     check=0
-    h=im.height
-    w=im.width
+    w=img_arr.shape[0]
+    h=img_arr.shape[1]
     i=0
     j=0
+    rgb=0
     while(True):
-        Data.append(add(img_arr[i][j],nob))
+        Data.append(add(img_arr[i][j][rgb],nob))
         j=j+1
         check+=1
         if(j==w):
             j=0
             i=i+1
+        if(rgb==3):
+            rgb=0
         if(check==key):
             break
 
