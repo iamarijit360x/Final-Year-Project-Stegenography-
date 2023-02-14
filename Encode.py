@@ -14,8 +14,8 @@ def encode(msg,nob):
     ig='cat.png'#input("Enter Image name with extension/Image path:")
     img_arr = cv2.imread(ig)
     #print(img_arr.flags["WRITEABLE"])
-    w=img_arr.shape[0]
-    h=img_arr.shape[1]
+    h=img_arr.shape[0]
+    w=img_arr.shape[1]
     #print(h,w)
     bucket=buck(nob)
     print(bucket)

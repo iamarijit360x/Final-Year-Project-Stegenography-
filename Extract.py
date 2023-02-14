@@ -16,8 +16,8 @@ def extract(nob):
     key=int(input("Enter Key:"))
     Data=[]
     check=0
-    w=img_arr.shape[0]
-    h=img_arr.shape[1]
+    h=img_arr.shape[0]
+    w=img_arr.shape[1]
     i=0
     j=0
     rgb=0
