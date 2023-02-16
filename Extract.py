@@ -9,8 +9,9 @@ import cv2
 from PIL import Image  
 import numpy
 from Utilites import add,bit2strings
-
+from SkinDetection import skind
 def extract(nob):
+    ig='stegoimg.PNG'
     #nob=int(input("Number Of Bits:"))
     img_arr = cv2.imread('stegoimg.PNG') 
     key=int(input("Enter Key:"))
@@ -18,24 +19,18 @@ def extract(nob):
     check=0
     h=img_arr.shape[0]
     w=img_arr.shape[1]
-    i=0
-    j=0
+   
+    k=0
+    cord=skind(ig,2)
     rgb=0
-    while(True):
-        print(f"IMG={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')} Add_return={add(img_arr[i][j][rgb],nob)}")
-        Data.append(add(img_arr[i][j][rgb],nob))
-        check+=1
-        rgb+=1
-        if(rgb==3):
-            rgb=0
-            j=j+1
-        if(j==w):
-            j=0
-            i=i+1
-        
-        if(check==key):
-            break
-
+    for check in range(key):
+        i=cord[k][0]
+        j=cord[k][1]
+        print(f"i={i} j={j}")
+        for rgb in range(0,3):
+            #print(f"IMG={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')} Add_return={add(img_arr[i][j][rgb],nob)}")
+            Data.append(add(img_arr[i][j][rgb],nob))
+        k=k+1
 
     f=open("msg.txt","a")
     f.write("\n")
