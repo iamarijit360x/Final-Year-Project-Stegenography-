@@ -36,13 +36,15 @@ def encode(msg,nob):
     for k in range(len(msg_arr)):
         
         t=img_arr[i][j][rgb]
-        
+        #print(f"{i}{j}{rgb}")
         t=list(format(t,"b"))
         t=t[-nob:]
         t="".join(t)
-        #print(f"DATA={msg_arr[j]} ",end=" ")
+        
         c=change(int(t,2),msg_arr[k],bucket[msg_arr[k]],nob)
-        #print(f"IMG OLD={img_arr[i][j]} ",end=" ")
+        print(f"IMG OLD={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')}",end=" ")
+        print(f"DATA={msg_arr[k]},ImgPixel={t},chnage Needed={c} " ,end=" ")
+        
         if(c!=-1):
             c=list(format(c,'0'+str(nob)+'b'))
             #print(c)
@@ -53,20 +55,22 @@ def encode(msg,nob):
             t=t[:-nob]
             t="".join(t)
             t=t+c
-            img_arr[i][j]=int(t,2)
+            img_arr[i][j][rgb]=int(t,2)
         #print(f"DATA NEW={add(img_arr[i][j],nob)} ",end=" ")
-        #print(f"IMG NEW={img_arr[i][j]}")
-        j=j+1
+        print(f"  IMG NEW={img_arr[i][j][rgb]}  {format(img_arr[i][j][rgb],'b')}")
+        rgb+=1
+        if(rgb==3):
+            j=j+1
+            rgb=0
         if(j==w):
             j=0
             i=i+1
-        if(rgb==3):
-            rgb=0
+       
         
 
 
     cv2.imwrite('stegoimg.PNG',img_arr)
     print('\n\nKEY=',len(msg_arr))
+    
 
-
-     
+        

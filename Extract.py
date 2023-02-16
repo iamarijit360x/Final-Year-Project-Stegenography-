@@ -22,14 +22,17 @@ def extract(nob):
     j=0
     rgb=0
     while(True):
+        print(f"IMG={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')} Add_return={add(img_arr[i][j][rgb],nob)}")
         Data.append(add(img_arr[i][j][rgb],nob))
-        j=j+1
         check+=1
+        rgb+=1
+        if(rgb==3):
+            rgb=0
+            j=j+1
         if(j==w):
             j=0
             i=i+1
-        if(rgb==3):
-            rgb=0
+        
         if(check==key):
             break
 
