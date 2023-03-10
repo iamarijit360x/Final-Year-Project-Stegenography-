@@ -11,6 +11,8 @@ import numpy
 from Utilites import add,string2bits,buck,change
 
 def encode(msg,nob):
+    f=open("msg.txt","w")
+    f.write(msg+'\n')
     ig='cat.png'#input("Enter Image name with extension/Image path:")
     img_arr = cv2.imread(ig)
     #print(img_arr.flags["WRITEABLE"])
@@ -20,7 +22,7 @@ def encode(msg,nob):
     bucket=buck(nob)
     print(bucket)
     msg_bin=list(string2bits(msg))
-    f=open("msg.txt","w")
+    
     for m in msg_bin:
         f.write(m) 
     msg_arr=[]
@@ -71,6 +73,7 @@ def encode(msg,nob):
 
     cv2.imwrite('stegoimg.PNG',img_arr)
     print('\n\nKEY=',len(msg_arr))
+    return len(msg_arr)
     
 
         

@@ -5,7 +5,7 @@ Created on Thur Sept 22
 @author: Arijit
 """
 from re import I
-
+import random
 
 def add(n,nob): #returns Binary addition of last nob bits
     b=format(n,"b")
@@ -61,3 +61,27 @@ def change(pixel,data,temp,nob): #returns the change requried in last 4 bits of 
                 diff=x
                 e=i
         return e
+def generate_msg(N):
+    arr=[]
+    arrn=[]
+    arrs=[]
+    for i in range(33,42):
+        arrs.append(chr(i))
+    for i in range(ord('A'),ord('Z')):
+        arr.append(chr(i))
+    for i in range(0,10):
+        arrn.append(i)
+    x=""
+    for i in range(N):
+        ch=random.randint(0,2)
+        if(ch==1):
+            r=random.randint(0,1)
+            if(r):
+                x=x+random.choice(arr)
+            else:
+                x=x+random.choice(arr).lower()
+        elif(ch==2):
+            x=x+str(random.choice(arrn))
+        else:
+            x=x+random.choice(arrs)
+    return x

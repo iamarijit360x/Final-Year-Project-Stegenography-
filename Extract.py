@@ -10,10 +10,11 @@ from PIL import Image
 import numpy
 from Utilites import add,bit2strings
 
-def extract(nob):
+def extract(nob,key=""):
     #nob=int(input("Number Of Bits:"))
-    img_arr = cv2.imread('stegoimg.PNG') 
-    key=int(input("Enter Key:"))
+    img_arr = cv2.imread('stegoimg.PNG')
+    if(key==""): 
+        key=int(input("Enter Key:"))
     Data=[]
     check=0
     h=img_arr.shape[0]
