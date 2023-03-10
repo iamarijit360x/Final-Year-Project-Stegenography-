@@ -8,6 +8,6 @@ while(True):
         msg=input("Enter Secrect Message:")
         encode(msg,nob)
     elif(ch==2):
-        print(extract(nob))
+        print('SECRET MESSAGE :'+extract(nob))
     else:
         break

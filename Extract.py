@@ -26,9 +26,11 @@ def extract(nob):
     for check in range(key):
         i=cord[k][0]
         j=cord[k][1]
-        print(f"i={i} j={j}")
+        print(f"I={i},J={j}")
+        
         for rgb in range(0,3):
             #print(f"IMG={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')} Add_return={add(img_arr[i][j][rgb],nob)}")
+            print(f"IMG ={img_arr[i][j][rgb]}")
             Data.append(add(img_arr[i][j][rgb],nob))
         k=k+1
 

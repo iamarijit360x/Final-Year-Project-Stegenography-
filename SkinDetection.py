@@ -24,6 +24,8 @@ def skind(image,nn):
 
     HSV_result = cv2.bitwise_not(HSV_mask)
     YCrCb_result = cv2.bitwise_not(YCrCb_mask)
+
+ 
     global_result=cv2.bitwise_not(global_mask)
 
     coordinates = np.argwhere(global_result == 0)
