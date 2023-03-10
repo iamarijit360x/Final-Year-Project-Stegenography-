@@ -8,7 +8,7 @@ from os import listdir
 i = 1
 
 path=os.getcwd()
-img_path=path+'/HR/'
+img_path=path+'/dataset/'
 save_path = path + '/Output/'
 IMAGES=os.listdir(img_path)
 IMAGES.sort()
