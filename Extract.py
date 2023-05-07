@@ -10,7 +10,7 @@ from PIL import Image
 import numpy
 from Utilites import add,bit2strings
 from SkinDetection import skind
-def extract(nob):
+def extract(nob,sucess_cord=None):
     ig='stegoimg.PNG'
     #nob=int(input("Number Of Bits:"))
     img_arr = cv2.imread('stegoimg.PNG') 
@@ -22,6 +22,10 @@ def extract(nob):
    
     k=0
     cord=skind(ig,2)
+    ###
+    for i in range(key):
+        print(cord[i])
+    ###
     rgb=0
     for check in range(key):
         i=cord[k][0]

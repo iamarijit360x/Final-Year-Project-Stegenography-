@@ -10,8 +10,13 @@ from PIL import Image
 import numpy
 from Utilites import add,string2bits,buck,change
 from SkinDetection import skind
-
+from onepixeldetection import detect_pixel
 def encode(msg,nob):
+    ###TESTING
+
+    sucess_cord=[]
+
+    ####
     ig='cat.png'#input("Enter Image name with extension/Image path:")
     img_arr = cv2.imread(ig)
     #print(img_arr.flags["WRITEABLE"])
@@ -30,8 +35,9 @@ def encode(msg,nob):
     
     print(msg_arr)
     cord=skind(ig,1)
-    #for c in cord:
-        #print(img_arr[c[0]][c[1]])
+    print("SKIN PIXEL")
+    for c in range(12):
+        print(cord[c])
     #print(cord)
     j=0
     i=0
@@ -39,22 +45,24 @@ def encode(msg,nob):
     rgb=0
     msg_index=0
     flag=False
-    for k in range(len(msg_arr)):
+    while(k<len(cord)):
         i=cord[k][0]
         j=cord[k][1]
-        print(f"i={i} j={j}")
+        #print(f"i={i} j={j}")
         
-        
+        #print(f"TRYING COORDINATES {i},{j}   MSG_BITS={msg_arr[msg_index]} {msg_arr[msg_index+1]} {msg_arr[msg_index+2]}")
         for rgb in range(0,3):
+            
             if(msg_index==len(msg_arr)):
                 flag=True
                 break
+            print(f"MSGBIT{msg_index}:{msg_arr[msg_index]}")
             t=img_arr[i][j][rgb]
             #print(f"{i}{j}{rgb}")
             t=list(format(t,"b"))
             t=t[-nob:]
             t="".join(t)
-            print(f"IMG OLD={img_arr[i][j][rgb]} ",end=" ") 
+            #print(f"IMG OLD={img_arr[i][j][rgb]} ",end=" ") 
             c=change(int(t,2),msg_arr[msg_index],bucket[msg_arr[msg_index]],nob)
             
            # print(f"IMG OLD={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')}",end=" ")
@@ -72,21 +80,39 @@ def encode(msg,nob):
                 t=t+c
                 img_arr[i][j][rgb]=int(t,2)
             msg_index+=1
-            print(f"IMG NEW={img_arr[i][j][rgb]} {add(img_arr[i][j][rgb],nob)} ")
-           
+            #print(f"IMG NEW={img_arr[i][j][rgb]} {add(img_arr[i][j][rgb],nob)} ")
+        if(not(detect_pixel(img_arr[i][j]))):
+            print('Falied',i,j)
+            #print(f"IMG NEW={img_arr[i][j]}")
+            if(msg_index!=0):
+                msg_index-=3
+            
+        else:
+            print(f"Sucess COORDINATES {i},{j}")
+            sucess_cord.append([i,j])
+         
         if(flag):
             break
                
             #print(f"DATA NEW={add(img_arr[i][j],nob)} ",end=" ")
            #print(f"  IMG NEW={img_arr[i][j][rgb]}  {format(img_arr[i][j][rgb],'b')}")
         
-        
+        k+=1
        
         
 
 
     cv2.imwrite('stegoimg.PNG',img_arr)
+    ####
+    img_arr = cv2.imread('stegoimg.PNG')
+    for i in range(len(sucess_cord)):
+        print(sucess_cord[i][0],sucess_cord[i][1],img_arr[sucess_cord[i][0]][sucess_cord[i][1]])
+    ####
     print('\n\nKEY=',len(msg_arr))
+
+    ###
+    return sucess_cord
+    ###
     
 
         
