@@ -9,8 +9,7 @@ from email.mime import image
 from PIL import Image  
 import numpy
 from Utilites import add,string2bits,buck,change
-from SkinDetection import skind
-from onepixeldetection import detect_pixel
+from SkinDetection import skind,detect_pixel
 def encode(msg,nob):
     ###TESTING
 
@@ -33,11 +32,11 @@ def encode(msg,nob):
     for i in range(0,len(msg_bin)-1,2):
         msg_arr.append("".join(msg_bin[i:i+2]))
     
-    print(msg_arr)
+    #print(msg_arr)
     cord=skind(ig,1)
-    print("SKIN PIXEL")
-    for c in range(12):
-        print(cord[c])
+    #print("SKIN PIXEL")
+    #for c in range(12):
+        #print(cord[c])
     #print(cord)
     j=0
     i=0
@@ -56,7 +55,7 @@ def encode(msg,nob):
             if(msg_index==len(msg_arr)):
                 flag=True
                 break
-            print(f"MSGBIT{msg_index}:{msg_arr[msg_index]}")
+            #print(f"MSGBIT{msg_index}:{msg_arr[msg_index]}")
             t=img_arr[i][j][rgb]
             #print(f"{i}{j}{rgb}")
             t=list(format(t,"b"))
@@ -82,13 +81,13 @@ def encode(msg,nob):
             msg_index+=1
             #print(f"IMG NEW={img_arr[i][j][rgb]} {add(img_arr[i][j][rgb],nob)} ")
         if(not(detect_pixel(img_arr[i][j]))):
-            print('Falied',i,j)
+           # print('Falied',i,j)
             #print(f"IMG NEW={img_arr[i][j]}")
             if(msg_index!=0):
                 msg_index-=3
             
         else:
-            print(f"Sucess COORDINATES {i},{j}")
+            #print(f"Sucess COORDINATES {i},{j}")
             sucess_cord.append([i,j])
          
         if(flag):
@@ -104,9 +103,9 @@ def encode(msg,nob):
 
     cv2.imwrite('stegoimg.PNG',img_arr)
     ####
-    img_arr = cv2.imread('stegoimg.PNG')
-    for i in range(len(sucess_cord)):
-        print(sucess_cord[i][0],sucess_cord[i][1],img_arr[sucess_cord[i][0]][sucess_cord[i][1]])
+    #img_arr = cv2.imread('stegoimg.PNG')
+    #for i in range(len(sucess_cord)):
+        #print(sucess_cord[i][0],sucess_cord[i][1],img_arr[sucess_cord[i][0]][sucess_cord[i][1]])
     ####
     print('\n\nKEY=',len(msg_arr))
 
