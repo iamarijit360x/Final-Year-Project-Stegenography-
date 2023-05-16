@@ -20,14 +20,17 @@ def extract(nob):
     h=img_arr.shape[0]
     w=img_arr.shape[1]
    
-    k=0
+   
     cord=skind(ig,2)
+    print(len(cord))
     ###
     #for i in range(key):
         #print(cord[i])
     ###
     rgb=0
-    for check in range(key):
+    check=0
+    flag=False
+    for k in range(len(cord)):
         i=cord[k][0]
         j=cord[k][1]
         #print(f"I={i},J={j}")
@@ -36,7 +39,12 @@ def extract(nob):
             #print(f"IMG={img_arr[i][j][rgb]} {format(img_arr[i][j][rgb],'b')} Add_return={add(img_arr[i][j][rgb],nob)}")
             #print(f"IMG ={img_arr[i][j][rgb]}")
             Data.append(add(img_arr[i][j][rgb],nob))
-        k=k+1
+            check+=1
+            if(check==key):
+                flag=True
+                break
+        if(flag):
+            break
 
     f=open("msg.txt","a")
     f.write("\n")
@@ -49,4 +57,8 @@ def extract(nob):
 
     for m in Data2:
         f.write(m) 
-    return (bit2strings(Data2))
+
+    f=open("msg_rec.txt","w")
+    msg=(bit2strings(Data2))
+    f.write(msg)
+    return msg

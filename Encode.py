@@ -8,9 +8,9 @@ import cv2
 from email.mime import image
 from PIL import Image  
 import numpy
-from Utilites import add,string2bits,buck,change
+from Utilites import add,string2bits,buck,change,generate_msg
 from SkinDetection import skind,detect_pixel
-def encode(msg,nob):
+def encode(msg,nob,mode):
     ###TESTING
 
     sucess_cord=[]
@@ -21,9 +21,18 @@ def encode(msg,nob):
     #print(img_arr.flags["WRITEABLE"])
     h=img_arr.shape[0]
     w=img_arr.shape[1]
-    #print(h,w)
+    cord=skind(ig,1)
+    MAX=(len(cord)*3*2)//8
     bucket=buck(nob)
-    #print(bucket)
+  
+    ####
+    if mode:
+     msg=generate_msg(MAX)
+    ####
+    msg_gen=open("msg_gen.txt","w")
+    msg_gen.write(msg)
+    msg_gen.close()
+
     msg_bin=list(string2bits(msg))
     f=open("msg.txt","w")
     for m in msg_bin:
@@ -33,11 +42,12 @@ def encode(msg,nob):
         msg_arr.append("".join(msg_bin[i:i+2]))
     
     #print(msg_arr)
-    cord=skind(ig,1)
+
     #print("SKIN PIXEL")
     #for c in range(12):
         #print(cord[c])
     #print(cord)
+    LL=0
     j=0
     i=0
     k=0
@@ -89,6 +99,7 @@ def encode(msg,nob):
         else:
             #print(f"Sucess COORDINATES {i},{j}")
             sucess_cord.append([i,j])
+            LL+=6
          
         if(flag):
             break
@@ -98,8 +109,10 @@ def encode(msg,nob):
         
         k+=1
        
-        
-
+    print(f"Message Length={LL//8}  Max Length={MAX}")
+    msg_gen=open("msg_gen.txt","a")
+    msg_gen.write(msg[:LL//8])
+    msg_gen.close()
 
     cv2.imwrite('stegoimg.PNG',img_arr)
     ####
@@ -107,11 +120,8 @@ def encode(msg,nob):
     #for i in range(len(sucess_cord)):
         #print(sucess_cord[i][0],sucess_cord[i][1],img_arr[sucess_cord[i][0]][sucess_cord[i][1]])
     ####
-    print('\n\nKEY=',len(msg_arr))
+    print('\n\nKEY=',LL//2)
 
-    ###
-    return sucess_cord
-    ###
-    
+   
 
         
