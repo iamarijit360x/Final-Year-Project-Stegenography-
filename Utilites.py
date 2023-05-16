@@ -6,6 +6,8 @@ Created on Thur Sept 22
 """
 from re import I
 import random
+import numpy as np
+from PIL import Image
 
 def add(n,nob): #returns Binary addition of last nob bits
     b=format(n,"b")
