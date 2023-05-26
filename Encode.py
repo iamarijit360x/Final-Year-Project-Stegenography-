@@ -16,7 +16,7 @@ def encode(msg,nob,mode):
     sucess_cord=[]
 
     ####
-    ig='cat.png'#input("Enter Image name with extension/Image path:")
+    ig='org.png'#input("Enter Image name with extension/Image path:")
     img_arr = cv2.imread(ig)
     #print(img_arr.flags["WRITEABLE"])
     h=img_arr.shape[0]
@@ -52,6 +52,7 @@ def encode(msg,nob,mode):
     i=0
     k=0
     rgb=0
+    mcount=0
     msg_index=0
     flag=False
     while(k<len(cord)):
@@ -60,6 +61,7 @@ def encode(msg,nob,mode):
         #print(f"i={i} j={j}")
         
         #print(f"TRYING COORDINATES {i},{j}   MSG_BITS={msg_arr[msg_index]} {msg_arr[msg_index+1]} {msg_arr[msg_index+2]}")
+        mcount=0
         for rgb in range(0,3):
             
             if(msg_index==len(msg_arr)):
@@ -89,6 +91,7 @@ def encode(msg,nob,mode):
                 t=t+c
                 img_arr[i][j][rgb]=int(t,2)
             msg_index+=1
+            mcount+=2
             #print(f"IMG NEW={img_arr[i][j][rgb]} {add(img_arr[i][j][rgb],nob)} ")
         if(not(detect_pixel(img_arr[i][j]))):
            # print('Falied',i,j)
@@ -99,7 +102,7 @@ def encode(msg,nob,mode):
         else:
             #print(f"Sucess COORDINATES {i},{j}")
             sucess_cord.append([i,j])
-            LL+=6
+            LL+=mcount
          
         if(flag):
             break
@@ -109,7 +112,7 @@ def encode(msg,nob,mode):
         
         k+=1
        
-    print(f"Message Length={LL//8}  Max Length={MAX}")
+    print(f"Message Length={len(msg_arr)//4}  Max Length={MAX}")
     msg_gen=open("msg_gen.txt","a")
     msg_gen.write(msg[:LL//8])
     msg_gen.close()
@@ -120,7 +123,8 @@ def encode(msg,nob,mode):
     #for i in range(len(sucess_cord)):
         #print(sucess_cord[i][0],sucess_cord[i][1],img_arr[sucess_cord[i][0]][sucess_cord[i][1]])
     ####
-    print('\n\nKEY=',LL//2)
+    #print('LL=',LL)
+    print('\n\nKEY=',len(msg_arr))
 
    
 

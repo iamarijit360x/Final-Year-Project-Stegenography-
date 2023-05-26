@@ -47,7 +47,7 @@ def extract(nob):
             break
 
     f=open("msg.txt","a")
-    f.write("\n")
+    f.write("\n-----\n")
     
 
 
