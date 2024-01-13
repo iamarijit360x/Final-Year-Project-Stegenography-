@@ -20,7 +20,7 @@ This repository contains the code and documentation for the Steganography projec
 
 ## Usage
 1. Image Generation Using GAN(Archisman Roy) --[Click Here](https://www.youtube.com/watch?v=k92nX5D7UVk&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi)
-2. Skin Detection (Rachana Sengupta)--[Click Here]([https://www.youtube.com/watch?v=k92nX5D7UVk&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi](https://www.youtube.com/watch?v=vdxPXS3MI_4&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi-&index=2))
+2. Skin Detection (Rachana Sengupta)--[Click Here]([https://www.youtube.com/watch?v=k92nX5D7UVk&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi](https://www.youtube.com/watch?)v=vdxPXS3MI_4&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi-&index=2)
 3. Data Hinding and Extraction Demon(Arijit Banerjee)--[Click Here]([https://www.youtube.com/watch?v=k92nX5D7UVk&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi](https://www.youtube.com/watch?v=TG7IILvbsuU&list=PL74MVRCwyccQfmhffPmuWtFFtSWIz2qi-&index=4))
    
 
